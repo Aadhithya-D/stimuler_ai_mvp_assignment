@@ -1,7 +1,7 @@
 # Stimuler AI Lip Sync MVP
-Problem Statement: Create a converationtional 3D model powered by AI whcih can lip sync.
+Problem Statement: Create a conversational 3D model powered by AI that can lip sync.
 
-
+[Notion Doc](https://aadhithya-d.notion.site/aadhithya-d/Stimuler-AI-Assignment-MVP-6e650f7354c04753ab9574fed2cbfd00)
 
 ## Setup
 Create a `.env` file at the root of the repository to add your **OpenAI** and **ElevenLabs API Keys**. Refer to `.env.example` for the environment variable names.
