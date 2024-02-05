@@ -1,7 +1,7 @@
 {
   "name": "r3f-virtual-girlfriend-backend",
   "version": "1.0.0",
-  "description": "Backend for the virtual girlfriend app",
+  "description": "Backend for the IELTS Tutor app",
   "main": "index.js",
   "type": "module",
   "scripts": {

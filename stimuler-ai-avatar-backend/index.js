@@ -12,7 +12,7 @@ const openai = new OpenAI({
 });
 
 const elevenLabsApiKey = process.env.ELEVEN_LABS_API_KEY;
-const voiceID = "kgG7dCoKCfLehAPWkJOE";
+const voiceID = "wyu7qEZ9m1xm2uIyH8tU";
 
 const app = express();
 app.use(express.json());
@@ -53,43 +53,15 @@ const lipSyncMessage = async (message) => {
 
 app.post("/chat", async (req, res) => {
   const userMessage = req.body.message;
-  if (!userMessage) {
-    res.send({
-      messages: [
-        {
-          text: "Hey dear... How was your day?",
-          audio: await audioFileToBase64("audios/intro_0.wav"),
-          lipsync: await readJsonTranscript("audios/intro_0.json"),
-          facialExpression: "smile",
-          animation: "Talking_1",
-        },
-        {
-          text: "I missed you so much... Please don't go for so long!",
-          audio: await audioFileToBase64("audios/intro_1.wav"),
-          lipsync: await readJsonTranscript("audios/intro_1.json"),
-          facialExpression: "sad",
-          animation: "Crying",
-        },
-      ],
-    });
-    return;
-  }
   if (!elevenLabsApiKey || openai.apiKey === "-") {
     res.send({
       messages: [
         {
-          text: "Please my dear, don't forget to add your API keys!",
+          text: "Please, don't forget to add your API keys!",
           audio: await audioFileToBase64("audios/api_0.wav"),
           lipsync: await readJsonTranscript("audios/api_0.json"),
           facialExpression: "angry",
           animation: "Angry",
-        },
-        {
-          text: "You don't want to ruin Wawa Sensei with a crazy ChatGPT and ElevenLabs bill, right?",
-          audio: await audioFileToBase64("audios/api_1.wav"),
-          lipsync: await readJsonTranscript("audios/api_1.json"),
-          facialExpression: "smile",
-          animation: "Laughing",
         },
       ],
     });
@@ -107,7 +79,7 @@ app.post("/chat", async (req, res) => {
       {
         role: "system",
         content: `
-        You are a virtual girlfriend.
+        You are Stimuler AI: World's best IELTS Tutor.
         You will always reply with a JSON array of messages. With a maximum of 3 messages.
         Each message has a text, facialExpression, and animation property.
         The different facial expressions are: smile, sad, angry, surprised, funnyFace, and default.
@@ -129,6 +101,7 @@ app.post("/chat", async (req, res) => {
     // generate audio file
     const fileName = `audios/message_${i}.mp3`; // The name of your audio file
     const textInput = message.text; // The text you wish to convert to speech
+    console.log(message);
     await voice.textToSpeech(elevenLabsApiKey, voiceID, fileName, textInput);
     // generate lipsync
     await lipSyncMessage(i);
@@ -150,5 +123,5 @@ const audioFileToBase64 = async (file) => {
 };
 
 app.listen(port, () => {
-  console.log(`Virtual Girlfriend listening on port ${port}`);
+  console.log(`IELTS Tutor listening on port ${port}`);
 });
